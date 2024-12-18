@@ -21,14 +21,6 @@ services:
     volumes:
       - ./etc/wireguard:/etc/wireguard # WireGuard config files
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    networks:
-      - wg-network
-    ports:
-      - "6379:6379" # Redis service port
-
 networks:
   wg-network:
     driver: bridge

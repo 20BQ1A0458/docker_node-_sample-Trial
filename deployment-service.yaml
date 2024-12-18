@@ -112,3 +112,4 @@ metadata:
   namespace: auth
 data:
   redis-url: "redis://redis-new-service.auth.svc.cluster.local:6379"  # Redis service URL for WireGuard
+  

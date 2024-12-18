@@ -22,8 +22,6 @@ spec:
         - name: socket-wireguard
           image: bhargavram458/socket-wireguard:latest
           ports:
-            - name: http-port
-              containerPort: 8000
             - name: wireguard-port
               containerPort: 51820
               protocol: UDP
@@ -33,7 +31,7 @@ spec:
             - name: ADDRESS
               value: "10.0.0.0"
             - name: PORT
-              value: "8000"
+              value: "51820"
           securityContext:
             capabilities:
               add:
@@ -47,9 +45,6 @@ metadata:
 spec:
   type: LoadBalancer  # Assuming cloud provider with LoadBalancer support
   ports:
-    - name: http-port
-      port: 8000
-      targetPort: 8000
     - name: wireguard-port
       port: 51820
       targetPort: 51820

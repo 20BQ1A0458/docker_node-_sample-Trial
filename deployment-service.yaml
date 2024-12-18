@@ -55,17 +55,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis
-  namespace: socket
+  name: redis-new  # Unique Redis name in auth namespace
+  namespace: auth
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis
+      app: redis-new
   template:
     metadata:
       labels:
-        app: redis
+        app: redis-new
     spec:
       containers:
         - name: redis
@@ -94,15 +94,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-service
-  namespace: socket
+  name: redis-new-service  # Unique Redis service name
+  namespace: auth
 spec:
   ports:
     - name: redis-port
       port: 6379
       targetPort: 6379
   selector:
-    app: redis
+    app: redis-new
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -110,4 +110,4 @@ metadata:
   name: redis-url-config
   namespace: socket
 data:
-  redis-url: "redis://redis:6379"
+  redis-url: "redis://redis-new-service.auth.svc.cluster.local:6379"  # Updated to reference the new Redis service in auth namespace

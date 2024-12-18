@@ -27,11 +27,11 @@ spec:
               protocol: UDP
           env:
             - name: ISKUBERNETES
-              value: "false"
+              value: "true"
             - name: ADDRESS
               value: "10.0.0.0"
             - name: PORT
-              value: "51820"
+              value: "6200"
           securityContext:
             capabilities:
               add:

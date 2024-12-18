@@ -46,7 +46,7 @@ pipeline {
                 ]) {
                     echo 'Deploying application to Kubernetes...'
                     sh "kubectl apply -f deployment-service.yaml"
-                    sh "kubectl rollout restart deployment/socket-wireguard -n auth"  // Updated namespace
+                    sh "kubectl rollout restart deployment/node-wireguard -n auth"  // Updated namespace
                 }
             }
         }

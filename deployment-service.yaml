@@ -6,7 +6,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: socket-wireguard  # WireGuard app
+  name: socket-wireguard
   namespace: auth
 spec:
   replicas: 1
@@ -19,7 +19,7 @@ spec:
         app: socket-wireguard
     spec:
       containers:
-        - name: socket-wireguard  # Application name updated
+        - name: socket-wireguard
           image: socket-wireguard:latest
           ports:
             - name: http-port
@@ -37,7 +37,7 @@ spec:
             - name: REDIS_URL
               valueFrom:
                 configMapKeyRef:
-                  name: redis-url-config  # ConfigMap for Redis URL
+                  name: redis-url-config
                   key: redis-url
           volumeMounts:
             - name: wireguard-config
@@ -49,13 +49,13 @@ spec:
       volumes:
         - name: wireguard-config
           hostPath:
-            path: ./etc/wireguard
+            path: /etc/wireguard  # Absolute path for hostPath
             type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-new  # Unique Redis deployment name
+  name: redis-new
   namespace: auth
 spec:
   replicas: 1
@@ -77,10 +77,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: socket-wireguard-service  # Service for WireGuard
+  name: socket-wireguard-service
   namespace: auth
 spec:
-  type: LoadBalancer  # Expose as LoadBalancer service
+  type: LoadBalancer  # Assuming cloud provider with LoadBalancer support
   ports:
     - name: http-port
       port: 8000
@@ -95,7 +95,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-new-service  # Service for Redis
+  name: redis-new-service
   namespace: auth
 spec:
   ports:
@@ -111,4 +111,4 @@ metadata:
   name: redis-url-config
   namespace: auth
 data:
-  redis-url: "redis://redis-new-service.auth.svc.cluster.local:6379"  # Redis service URL for WireGuard app
+  redis-url: "redis://redis-new-service.auth.svc.cluster.local:6379"  # Redis service URL for WireGuard

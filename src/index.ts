@@ -59,7 +59,7 @@ import dgram from "dgram";
 // Create a UDP socket
 const server = dgram.createSocket("udp4");
 
-const PORT = 6000;
+const PORT = 51820;
 
 // Event: Socket is ready to receive messages
 server.on("listening", () => {

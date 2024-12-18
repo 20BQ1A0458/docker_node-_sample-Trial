@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: socket-wireguard
-          image: socket-wireguard:latest
+          image: bhargavram458/socket-wireguard:latest
           ports:
             - name: http-port
               containerPort: 8000

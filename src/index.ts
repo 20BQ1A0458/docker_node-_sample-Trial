@@ -26,9 +26,9 @@ export const CONFIG_PATH = "/etc/wireguard/wg0.conf";
 export const poolManager = createIPPoolManager(ADDRESS + "/24");
 
 // API Endpoints
-import peerRoutes from "./routes/peer.route";
+// import peerRoutes from "./routes/peer.route";
 
-app.use("/api/peer", peerRoutes);
+// app.use("/api/peer", peerRoutes);
 
 
 // app.listen(PORT, async () => {

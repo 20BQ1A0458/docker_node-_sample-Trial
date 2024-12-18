@@ -40,13 +40,13 @@ pipeline {
                         clusterName: 'EKS-1', 
                         contextName: '', 
                         credentialsId: 'k8-token', 
-                        namespace: 'socket',  // Updated namespace
+                        namespace: 'auth',  // Updated namespace
                         serverUrl: 'https://7302D1DF066773D16142E09F2D140FC0.sk1.ap-south-2.eks.amazonaws.com'
                     ]
                 ]) {
                     echo 'Deploying application to Kubernetes...'
                     sh "kubectl apply -f deployment-service.yaml"
-                    sh "kubectl rollout restart deployment/socket-wireguard -n socket"  // Updated namespace
+                    sh "kubectl rollout restart deployment/socket-wireguard -n auth"  // Updated namespace
                 }
             }
         }
@@ -59,12 +59,12 @@ pipeline {
                         clusterName: 'EKS-1', 
                         contextName: '', 
                         credentialsId: 'k8-token', 
-                        namespace: 'socket',  // Updated namespace
+                        namespace: 'auth',  // Updated namespace
                         serverUrl: 'https://7302D1DF066773D16142E09F2D140FC0.sk1.ap-south-2.eks.amazonaws.com'
                     ]
                 ]) {
                     echo 'Verifying deployment...'
-                    sh "kubectl get all -n socket"  // Updated namespace
+                    sh "kubectl get all -n auth"  // Updated namespace
                 }
             }
         }
